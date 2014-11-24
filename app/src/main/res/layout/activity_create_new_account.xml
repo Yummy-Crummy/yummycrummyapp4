@@ -108,7 +108,8 @@
         android:text="submit"
         android:id="@+id/submitButton"
         android:layout_below="@+id/gender"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:enabled="false" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
