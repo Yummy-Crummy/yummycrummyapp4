@@ -9,15 +9,22 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Contact Name"
-        android:id="@+id/txtName" />
+        android:id="@+id/txtName"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Password"
+        android:id="@+id/txtPassword" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Email"
-        android:id="@+id/txtEmail"
-        android:layout_marginTop="5dp" />
+        android:id="@+id/txtEmail" />
 
     <TextView
         android:layout_width="wrap_content"
