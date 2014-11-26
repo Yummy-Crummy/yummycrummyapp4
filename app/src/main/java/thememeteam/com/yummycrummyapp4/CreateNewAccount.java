@@ -1,5 +1,4 @@
 package thememeteam.com.yummycrummyapp4;
-//weeeeeeeeeeeeeeeeeeeeeeeeeeeee
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,17 +40,58 @@ public class CreateNewAccount extends Activity{
         emailTxt = (EditText) findViewById(R.id.email);
         birthdayTxt = (EditText) findViewById(R.id.bday);
         genderTxt = (EditText) findViewById(R.id.gender);
+        TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
         accountListView = (ListView) findViewById(R.id.listView);
+
+        tabHost.setup();
+        TabHost.TabSpec tabSpec = tabHost.newTabSpec("account");
+        tabSpec.setContent(R.id.tabNewAccount);
+        tabSpec.setIndicator("New Account");
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("list");
+        tabSpec.setContent(R.id.tabAccountList);
+        tabSpec.setIndicator("List");
+        tabHost.addTab(tabSpec);
+
+        final Button backButton = (Button) findViewById(R.id.btnBack);
+
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                switch(view.getId())
+                {
+                    case R.id.createNewAccountButton:
+                        backButtonClick();
+                        break;
+                }
+            }
+        });
+
+
+
+
 
         final Button submitBtn = (Button) findViewById(R.id.submitButton);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAccount(nameTxt.getText().toString(), passwordTxt.getText().toString(),emailTxt.getText().toString(), birthdayTxt.getText().toString(), genderTxt.getText().toString());
+                addAccount(0, nameTxt.getText().toString(), passwordTxt.getText().toString(),emailTxt.getText().toString(), birthdayTxt.getText().toString(), genderTxt.getText().toString());
                 populateList();
                 Toast.makeText(getApplicationContext(), nameTxt.getText().toString() + " has been created!",Toast.LENGTH_SHORT).show();
+
+                switch(v.getId())
+                {
+                    case R.id.submitButton:
+                        //submitButtonClick();
+                        break;
+                }
             }
+
         });
+
+
 
         emailTxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -68,8 +109,6 @@ public class CreateNewAccount extends Activity{
 
             }
         });
-
-
     }
 
     private class AccountListAdapter extends ArrayAdapter<Account>{
@@ -102,6 +141,14 @@ public class CreateNewAccount extends Activity{
 
     }
 
+    private void backButtonClick()
+    {
+        startActivity(new Intent("thememeteam.com.yummycrummyapp4.Login_Activity"));
+    }
+
+    private void submitButtonClick() {
+        startActivity(new Intent("thememeteam.com.yummycrummyapp4.Login_Activity"));
+    }
 
     private void populateList(){
         ArrayAdapter<Account> adapter = new AccountListAdapter();
@@ -109,8 +156,8 @@ public class CreateNewAccount extends Activity{
     }
 
 
-    private void addAccount(String name, String password, String email, String birthday, String gender){
-        AccountsList.add(new Account(name,password,email,birthday,gender));
+    private void addAccount(int id, String name, String password, String email, String birthday, String gender){
+        AccountsList.add(new Account(id, name,password,email,birthday,gender));
 
     }
 
