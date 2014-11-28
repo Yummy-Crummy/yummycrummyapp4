@@ -28,6 +28,7 @@ public class CreateNewAccount extends Activity{
     EditText nameTxt, passwordTxt, emailTxt, birthdayTxt, genderTxt;
     List<Account> AccountsList = new ArrayList<Account>();
     ListView accountListView;
+    DatabaseHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class CreateNewAccount extends Activity{
         genderTxt = (EditText) findViewById(R.id.gender);
         TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
         accountListView = (ListView) findViewById(R.id.listView);
+        dbHandler = new DatabaseHandler(this, null, null, 1);
 
         tabHost.setup();
         TabHost.TabSpec tabSpec = tabHost.newTabSpec("account");
@@ -62,7 +64,7 @@ public class CreateNewAccount extends Activity{
             {
                 switch(view.getId())
                 {
-                    case R.id.createNewAccountButton:
+                    case R.id.btnBack:
                         backButtonClick();
                         break;
                 }
@@ -77,16 +79,24 @@ public class CreateNewAccount extends Activity{
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAccount(0, nameTxt.getText().toString(), passwordTxt.getText().toString(),emailTxt.getText().toString(), birthdayTxt.getText().toString(), genderTxt.getText().toString());
+                Account account = new Account(dbHandler.getAccountsCount(),
+                        String.valueOf(nameTxt.getText()),
+                        String.valueOf(passwordTxt.getText()),
+                        String.valueOf(emailTxt.getText()),
+                        String.valueOf(birthdayTxt.getText()),
+                        String.valueOf(genderTxt.getText()));
+                dbHandler.createAccount(account);
+                AccountsList.add(account);
                 populateList();
                 Toast.makeText(getApplicationContext(), nameTxt.getText().toString() + " has been created!",Toast.LENGTH_SHORT).show();
 
-                switch(v.getId())
+               /* switch(v.getId())
                 {
                     case R.id.submitButton:
                         //submitButtonClick();
                         break;
                 }
+                */
             }
 
         });
@@ -109,6 +119,16 @@ public class CreateNewAccount extends Activity{
 
             }
         });
+
+        List<Account> addableAccounts = dbHandler.getAllAccounts();
+        int accountCount = dbHandler.getAccountsCount();
+
+        for (int i = 0; i < accountCount; i++){
+            AccountsList.add(addableAccounts.get(i));
+        }
+        if (!addableAccounts.isEmpty())
+            populateList();
+
     }
 
     private class AccountListAdapter extends ArrayAdapter<Account>{
