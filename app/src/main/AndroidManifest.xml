@@ -43,6 +43,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="thememeteam.com.yummycrummyapp4.HomeScreen"
+            android:label="@string/title_activity_home_screen" >
+            <intent-filter>
+                <action android:name="thememeteam.com.yummycrummyapp4.HomeScreen" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
