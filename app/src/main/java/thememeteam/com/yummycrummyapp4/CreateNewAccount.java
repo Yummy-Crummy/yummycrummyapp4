@@ -1,12 +1,9 @@
 package thememeteam.com.yummycrummyapp4;
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -16,8 +13,6 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +32,7 @@ public class CreateNewAccount extends Activity{
 
 
         nameTxt = (EditText) findViewById(R.id.name);
-        passwordTxt = (EditText) findViewById(R.id.password);
+        passwordTxt = (EditText) findViewById(R.id.Password);
         emailTxt = (EditText) findViewById(R.id.email);
         birthdayTxt = (EditText) findViewById(R.id.bday);
         genderTxt = (EditText) findViewById(R.id.gender);
@@ -85,11 +80,13 @@ public class CreateNewAccount extends Activity{
                         String.valueOf(emailTxt.getText()),
                         String.valueOf(birthdayTxt.getText()),
                         String.valueOf(genderTxt.getText()));
-                dbHandler.createAccount(account);
-                AccountsList.add(account);
-                populateList();
-                Toast.makeText(getApplicationContext(), nameTxt.getText().toString() + " has been created!",Toast.LENGTH_SHORT).show();
-
+                if (!accountExists(account)) {
+                    dbHandler.createAccount(account);
+                    AccountsList.add(account);
+                    Toast.makeText(getApplicationContext(), String.valueOf(nameTxt.getText()) + " has been created!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                 Toast.makeText(getApplicationContext(), String.valueOf(nameTxt.getText()) + " already exists. Please use a different name.", Toast.LENGTH_SHORT).show();
                /* switch(v.getId())
                 {
                     case R.id.submitButton:
@@ -111,7 +108,7 @@ public class CreateNewAccount extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                submitBtn.setEnabled(!nameTxt.getText().toString().trim().isEmpty()); //submit button is enable once email is entered
+                submitBtn.setEnabled(String.valueOf(nameTxt.getText()).trim().length() > 0); //submit button is enable once email is entered
             }
 
             @Override
@@ -120,6 +117,11 @@ public class CreateNewAccount extends Activity{
             }
         });
 
+        if (dbHandler.getAccountsCount() != 0)
+            AccountsList.addAll(dbHandler.getAllAccounts());
+
+        populateList();
+/*
         List<Account> addableAccounts = dbHandler.getAllAccounts();
         int accountCount = dbHandler.getAccountsCount();
 
@@ -128,8 +130,11 @@ public class CreateNewAccount extends Activity{
         }
         if (!addableAccounts.isEmpty())
             populateList();
+*/
 
     }
+
+
 
     private class AccountListAdapter extends ArrayAdapter<Account>{
         public AccountListAdapter(){
@@ -159,6 +164,17 @@ public class CreateNewAccount extends Activity{
             return view;
         }
 
+    }
+
+    private boolean accountExists(Account account){
+        String name = account.getName();
+        int accountCount = AccountsList.size();
+
+        for (int i = 0; i < accountCount; i++){
+            if (name.compareToIgnoreCase(AccountsList.get(i).getName()) == 0)
+                return true;
+        }
+        return false;
     }
 
     private void backButtonClick()

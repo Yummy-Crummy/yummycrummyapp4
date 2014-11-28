@@ -39,13 +39,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_BIRTHDAY + " TEXT ,"
                 + KEY_GENDER + " TEXT " + ")";
         db.execSQL(CREATE_TABLE_ACCOUNTS);
-        int love = 0;
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_ACCOUNTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNTS);
 
         onCreate(db);
     }
@@ -65,8 +64,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Account getAccount(int id){
-        String query = "Select * FROM " + TABLE_ACCOUNTS + "WHERE" + KEY_ID + " = \"" + id + "\"";
+
+    public Account getAccount(String name, String password){
+        String query = "Select * FROM " + TABLE_ACCOUNTS + " WHERE " + KEY_NAME + " = \"" + name + "\"" + " AND " + KEY_PASSWORD + " = \"" + password + "\"";
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
@@ -94,7 +94,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         boolean result = false;
 
-        String query = "Select * FROM" + TABLE_ACCOUNTS + "WHERE" + KEY_ID + " = \"" + id + "\"";
+        String query = "Select * FROM " + TABLE_ACCOUNTS + " WHERE " + KEY_ID + " = \"" + id + "\"";
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -102,7 +102,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()){
             account.setId(Integer.parseInt(cursor.getString(0)));
-            db.delete(TABLE_ACCOUNTS, KEY_ID + "=?",
+            db.delete(TABLE_ACCOUNTS, KEY_ID + " =? ",
                     new String[] { String.valueOf(account.getId())});
             cursor.close();
             result = true;
@@ -131,7 +131,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_BIRTHDAY, account.getBirthday());
         values.put(KEY_GENDER, account.getGender());
 
-        return db.update(TABLE_ACCOUNTS, values, KEY_ID + "=?", new String[] {String.valueOf(account.getId())});
+        int rowsAffected = db.update(TABLE_ACCOUNTS, values, KEY_ID + " =? ", new String[] {String.valueOf(account.getId())});
+        db.close();
+
+        return rowsAffected;
 
     }
 
@@ -143,16 +146,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()){
             do {
-                Account account = new Account(Integer.parseInt(cursor.getString(0)), //get the id
+                accounts.add(new Account(Integer.parseInt(cursor.getString(0)), //get the id
                         cursor.getString(1), //get the name
                         cursor.getString(2), //get the password
                         cursor.getString(3), //get the email
                         cursor.getString(4), //get the birthday
-                        cursor.getString(5)); //get the gender
-                accounts.add(account);
+                        cursor.getString(5)));
             }
             while (cursor.moveToNext());
         }
+        cursor.close();
+        db.close();
         return accounts;
 
     }
