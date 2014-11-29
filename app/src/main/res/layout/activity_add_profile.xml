@@ -23,7 +23,8 @@
         android:id="@+id/firstName"
         android:layout_below="@+id/addProfileText"
         android:layout_centerHorizontal="true"
-        android:hint="First Name" />
+        android:hint="First Name"
+        android:layout_marginTop="110dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -53,7 +54,8 @@
         android:id="@+id/uploadPicButton"
         android:layout_below="@+id/gender"
         android:layout_alignLeft="@+id/gender"
-        android:layout_alignStart="@+id/gender" />
+        android:layout_alignStart="@+id/gender"
+        android:layout_marginLeft="36dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -62,5 +64,15 @@
         android:id="@+id/submitButton"
         android:layout_below="@+id/uploadPicButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="102dp" />
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/addProfileText"
+        android:layout_alignLeft="@+id/firstName"
+        android:layout_alignStart="@+id/firstName"
+        android:layout_marginLeft="55dp"
+        android:src="@drawable/no_user_logo" />
 </RelativeLayout>

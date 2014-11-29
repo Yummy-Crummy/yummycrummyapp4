@@ -1,6 +1,7 @@
 package thememeteam.com.yummycrummyapp4;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -16,6 +18,7 @@ public class AddProfile extends Activity
 
 
    EditText profileName, profileBday, profileGender;
+   ImageView contactImage;
    DatabaseHandler dbHandler;
 
     @Override
@@ -28,6 +31,7 @@ public class AddProfile extends Activity
         profileName = (EditText) findViewById(R.id.firstName);
         profileBday = (EditText) findViewById(R.id.bday);
         profileGender = (EditText) findViewById(R.id.gender);
+        contactImage = (ImageView) findViewById(R.id.imageView);
      //   int myAccount = dbHandler.myAccount;
 
         final Button submitButton = (Button) findViewById(R.id.submitButton);
@@ -54,7 +58,22 @@ public class AddProfile extends Activity
             }
 
         });//end setOnClickListener
+
+        contactImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Profile Image"), 1);
+            }
+        });
     }//end OnCreate
 
+    public void onActivityResult(int reqCode, int resCode, Intent data){
+        if(resCode == RESULT_OK){
+            contactImage.setImageURI(data.getData());
+        }
+    }
 
 } //end class
