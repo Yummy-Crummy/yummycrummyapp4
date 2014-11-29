@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,9 +85,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(KEY_ID, profile.getAccountID());
+        values.put(KEY_PROFILE_ID, profile.getProfileID());
         values.put(KEY_PROFILE_NAME, profile.getName());
-        values.put(KEY_BIRTHDAY, profile.getBirthday());
-        values.put(KEY_EMAIL, profile.getGender());
+        values.put(KEY_PROFILE_BIRTHDAY, profile.getBirthday());
+        values.put(KEY_PROFILE_GENDER, profile.getGender());
 
         db.insert(TABLE_PROFILES, null, values);
         db.close();

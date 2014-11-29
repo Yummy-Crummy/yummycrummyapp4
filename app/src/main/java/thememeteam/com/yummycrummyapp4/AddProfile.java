@@ -40,21 +40,17 @@ public class AddProfile extends Activity
                         String.valueOf(profileName.getText()),
                         String.valueOf(profileBday.getText()),
                         String.valueOf(profileGender.getText()));
-                Toast.makeText(getApplicationContext(), dbHandler.getProfileCount() + " profiles", Toast.LENGTH_SHORT).show();
-                if (dbHandler.getProfile(dbHandler.getMyAccount(), String.valueOf(profileName.getText())) != null) {
+                Toast.makeText(getApplicationContext(), profile.getAccountID() + " is accountID", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), profile.getProfileID() + " is profileID", Toast.LENGTH_SHORT).show();
+                if (dbHandler.getProfile(dbHandler.getMyAccount(), String.valueOf(profileName.getText())) == null) {
                     dbHandler.createProfile(profile);
                     // AccountsList.add(account);
                     Toast.makeText(getApplicationContext(), String.valueOf(profileName.getText()) + " has been created!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), dbHandler.getProfileCount() + " profiles", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Toast.makeText(getApplicationContext(), String.valueOf(profileName.getText()) + " already exists. Please use a different name.", Toast.LENGTH_SHORT).show();
-               /* switch(v.getId())
-                {
-                    case R.id.submitButton:
-                        //submitButtonClick();
-                        break;
-                }
-                */
+
             }
 
         });//end setOnClickListener
