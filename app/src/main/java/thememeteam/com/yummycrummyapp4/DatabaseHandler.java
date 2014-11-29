@@ -14,15 +14,21 @@ import java.util.List;
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
+    public static int myAccount = 0;
     private static final String DATABASE_NAME = "accountManager",
     TABLE_ACCOUNTS = "accounts",
     KEY_ID = "id",
     KEY_NAME = "name",
     KEY_PASSWORD = "password",
     KEY_EMAIL = "email",
-    KEY_BIRTHDAY = "address",
-    KEY_GENDER = "gender";
+    KEY_BIRTHDAY = "birthday",
+    KEY_GENDER = "gender",
+    TABLE_PROFILES = "profiles",
+    KEY_PROFILE_ID = "profileID",
+    KEY_PROFILE_NAME = "profileName",
+    KEY_PROFILE_BIRTHDAY = "profileBirthday",
+    KEY_PROFILE_GENDER = "profileGender";
 
     public DatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -39,12 +45,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_BIRTHDAY + " TEXT ,"
                 + KEY_GENDER + " TEXT " + ")";
         db.execSQL(CREATE_TABLE_ACCOUNTS);
+        String CREATE_TABLE_PROFILES = " CREATE TABLE " +
+                TABLE_PROFILES + "("
+                + KEY_ID + " INTEGER ,"
+                + KEY_PROFILE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + KEY_PROFILE_NAME + " TEXT ,"
+                + KEY_PROFILE_BIRTHDAY + " TEXT ,"
+                + KEY_PROFILE_GENDER + " TEXT " + ")";
+        db.execSQL(CREATE_TABLE_PROFILES);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROFILES);
 
         onCreate(db);
     }
@@ -62,6 +77,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_ACCOUNTS, null, values);
         db.close();
+    }
+
+    public void createProfile (Profile profile){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_ID, profile.getAccountID());
+        values.put(KEY_PROFILE_NAME, profile.getName());
+        values.put(KEY_BIRTHDAY, profile.getBirthday());
+        values.put(KEY_EMAIL, profile.getGender());
+
+        db.insert(TABLE_PROFILES, null, values);
+        db.close();
+
     }
 
 
@@ -90,6 +119,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return account;
     }
 
+    public Profile getProfile(int id, String name){
+        String query = "Select * FROM " + TABLE_PROFILES + " WHERE " + KEY_ID + " = \"" + id + "\"" + " AND " + KEY_PROFILE_NAME + " = \"" + name + "\"";
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        Profile profile = new Profile();
+
+        if (cursor.moveToFirst()){
+            cursor.moveToFirst();
+            profile.setAccountID(Integer.parseInt(cursor.getString(0)));
+            profile.setProfileID(Integer.parseInt(cursor.getString(1)));
+            profile.setName(cursor.getString(2));
+            profile.setBirthday(cursor.getString(3));
+            profile.setGender(cursor.getString(4));
+        } else {
+            profile = null;
+        }
+
+        db.close();
+        cursor.close();
+        return profile;
+    }
+
     public boolean deleteAccount(int id){
 
         boolean result = false;
@@ -111,6 +164,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public boolean deleteProfile(int id){
+
+        boolean result = false;
+
+        String query = "Select * FROM " + TABLE_PROFILES + " WHERE " + KEY_PROFILE_ID + " = \"" + id + "\"";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        Profile profile = new Profile();
+
+        if (cursor.moveToFirst()){
+            profile.setProfileID(Integer.parseInt(cursor.getString(1)));
+            db.delete(TABLE_PROFILES, KEY_PROFILE_ID + " =? ",
+                    new String[] { String.valueOf(profile.getProfileID())});
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
+    }
+
     public int getAccountsCount(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_ACCOUNTS, null);
@@ -118,6 +192,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
+        return count;
+    }
+
+    public int getProfileCount(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PROFILES, null);
+        int count = cursor.getCount();
+        cursor.close();
+        db.close();
         return count;
     }
 
@@ -159,5 +242,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return accounts;
 
+    }
+
+    public int getMyAccount(){
+        return myAccount;
     }
 }

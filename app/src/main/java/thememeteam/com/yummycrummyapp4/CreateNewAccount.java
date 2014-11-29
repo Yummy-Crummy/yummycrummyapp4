@@ -30,7 +30,6 @@ public class CreateNewAccount extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_account);
 
-
         nameTxt = (EditText) findViewById(R.id.name);
         passwordTxt = (EditText) findViewById(R.id.Password);
         emailTxt = (EditText) findViewById(R.id.email);
@@ -87,13 +86,6 @@ public class CreateNewAccount extends Activity{
                     return;
                 }
                  Toast.makeText(getApplicationContext(), String.valueOf(nameTxt.getText()) + " already exists. Please use a different name.", Toast.LENGTH_SHORT).show();
-               /* switch(v.getId())
-                {
-                    case R.id.submitButton:
-                        //submitButtonClick();
-                        break;
-                }
-                */
             }
 
         });
@@ -121,16 +113,6 @@ public class CreateNewAccount extends Activity{
             AccountsList.addAll(dbHandler.getAllAccounts());
 
         populateList();
-/*
-        List<Account> addableAccounts = dbHandler.getAllAccounts();
-        int accountCount = dbHandler.getAccountsCount();
-
-        for (int i = 0; i < accountCount; i++){
-            AccountsList.add(addableAccounts.get(i));
-        }
-        if (!addableAccounts.isEmpty())
-            populateList();
-*/
 
     }
 
@@ -146,7 +128,7 @@ public class CreateNewAccount extends Activity{
                 view = getLayoutInflater(). inflate(R.layout.listview_item,parent,false);
             Account currentAccount = AccountsList.get(position);
 
-            TextView name = (TextView) view.findViewById(R.id.txtName);
+            TextView name = (TextView) view.findViewById(R.id.addProfileName);
             name.setText(currentAccount.getName());
 
             TextView password = (TextView) view.findViewById(R.id.txtPassword);
@@ -155,10 +137,10 @@ public class CreateNewAccount extends Activity{
             TextView email = (TextView) view.findViewById(R.id.txtEmail);
             email.setText(currentAccount.getEmail());
 
-            TextView birthday = (TextView) view.findViewById(R.id.txtBirthday);
+            TextView birthday = (TextView) view.findViewById(R.id.addProfileBirthday);
             birthday.setText(currentAccount.getBirthday());
 
-            TextView gender = (TextView) view.findViewById(R.id.txtGender);
+            TextView gender = (TextView) view.findViewById(R.id.addProfileGender);
             gender.setText(currentAccount.getGender());
 
             return view;
@@ -196,8 +178,4 @@ public class CreateNewAccount extends Activity{
         AccountsList.add(new Account(id, name,password,email,birthday,gender));
 
     }
-
-
-
-
 }
