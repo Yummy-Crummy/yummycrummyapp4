@@ -246,6 +246,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    public List<Profile> getAllProfiles(){
+        List<Profile> profiles = new ArrayList<Profile>();
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PROFILES, null);
+
+        if (cursor.moveToFirst()){
+            do {
+                profiles.add(new Profile(Integer.parseInt(cursor.getString(0)), //get the id
+                        Integer.parseInt(cursor.getString(1)), //get the name
+                        cursor.getString(2), //get the password
+                        cursor.getString(3), //get the birthday
+                        cursor.getString(4))); //get the gender
+            }
+            while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return profiles;
+
+    }
+
     public int getMyAccount(){
         return myAccount;
     }
