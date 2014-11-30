@@ -17,6 +17,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 2;
     public static int myAccount = 0;
+    public static int myProfile = 0;
     private static final String DATABASE_NAME = "accountManager",
     TABLE_ACCOUNTS = "accounts",
     KEY_ID = "id",
@@ -271,6 +272,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return profiles;
 
     }
+
     //this function gets all of the profiles for all accounts
     public List<Profile> getAllProfiles(){
         List<Profile> profiles = new ArrayList<Profile>();
@@ -296,5 +298,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public int getMyAccount(){
         return myAccount;
+    }
+
+    public void setMyAccount(int id){
+        myAccount = id;
+    }
+
+    public int getMyProfile(){ return myProfile;}
+
+    public void setMyProfile(int id){
+        myProfile = id;
     }
 }

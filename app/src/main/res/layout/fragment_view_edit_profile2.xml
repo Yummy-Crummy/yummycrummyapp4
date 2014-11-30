@@ -53,13 +53,13 @@
         android:id="@+id/listView3"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/editButton" />
+        android:layout_above="@+id/backButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit"
-        android:id="@+id/editButton"
+        android:id="@+id/backButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 

@@ -70,7 +70,7 @@ public class Login_Activity extends Activity implements View.OnClickListener {
         Account account = dbHandler.getAccount(String.valueOf(username), String.valueOf(password));
         if (account != null) //if they have already made an account with that username and password
         {
-            dbHandler.myAccount = account.getId();
+            dbHandler.setMyAccount(account.getId());
             Toast.makeText(getApplicationContext(), dbHandler.myAccount + "Login is valid", Toast.LENGTH_SHORT).show();
           //  Toast.makeText(getApplicationContext(), password + " is equal to " + account.getPassword(), Toast.LENGTH_SHORT).show();
             return true;

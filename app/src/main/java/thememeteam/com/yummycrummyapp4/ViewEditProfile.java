@@ -2,15 +2,13 @@ package thememeteam.com.yummycrummyapp4;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.provider.ContactsContract;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +28,7 @@ public class ViewEditProfile extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_view_edit_profile);
 
         Button editButton;
-        editButton = (Button) findViewById(R.id.editButton);
+        editButton = (Button) findViewById(R.id.backButton);
         editButton.setOnClickListener(this);
 
         dbHandler = new DatabaseHandler(this, null, null, 1);
@@ -41,6 +39,22 @@ public class ViewEditProfile extends Activity implements View.OnClickListener {
 
         Toast.makeText(getApplicationContext(),ProfileList.size()+ " profiles in the list",Toast.LENGTH_SHORT).show();
         populateList();
+
+
+        profileListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+               @Override
+               public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+               {
+                   LinearLayout ll = (LinearLayout) view;
+                   TextView clickedView = (TextView) ll.findViewById(R.id.listView2);
+                   Profile currentProfile = ProfileList.get(position);
+                   dbHandler.setMyProfile(currentProfile.getProfileID());
+                   Toast.makeText(ViewEditProfile.this, "Item with username "+currentProfile.getName(),Toast.LENGTH_SHORT).show();
+                   startActivity(new Intent("thememeteam.com.yummycrummyapp4.ViewEditProfile2"));
+        }
+                                               }
+        );
     }
     private class ProfileListAdapter extends ArrayAdapter<Profile>{
         public ProfileListAdapter(){
@@ -71,9 +85,9 @@ public class ViewEditProfile extends Activity implements View.OnClickListener {
         profileListView.setAdapter(adapter);
     }
 
-    private void editButtonClick()
+    private void backButtonClick()
     {
-        startActivity(new Intent("thememeteam.com.yummycrummyapp4.ViewEditProfile2"));
+        startActivity(new Intent("thememeteam.com.yummycrummyapp4.HomeScreen"));
     }
 
     @Override
@@ -81,8 +95,8 @@ public class ViewEditProfile extends Activity implements View.OnClickListener {
     {
         switch(view.getId())
         {
-            case R.id.editButton:
-                editButtonClick();
+            case R.id.backButton:
+                backButtonClick();
                 break;
         }
     }

@@ -23,13 +23,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="50dp"
-        android:layout_above="@+id/editButton" />
+        android:layout_above="@+id/backButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="edit"
-        android:id="@+id/editButton"
+        android:text="Back"
+        android:id="@+id/backButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
