@@ -37,7 +37,7 @@ public class ViewEditProfile extends Activity implements View.OnClickListener {
         profileListView = (ListView) findViewById(R.id.listView2);
 
         if (dbHandler.getProfileCount() != 0)
-            ProfileList.addAll(dbHandler.getAllProfiles());
+            ProfileList.addAll(dbHandler.getCorrectProfiles(dbHandler.getMyAccount()));
 
         Toast.makeText(getApplicationContext(),ProfileList.size()+ " profiles in the list",Toast.LENGTH_SHORT).show();
         populateList();
