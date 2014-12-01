@@ -30,6 +30,10 @@ public class ViewEditProfile2 extends Activity implements View.OnClickListener {
         backButton = (Button) findViewById(R.id.btnBack);
         backButton.setOnClickListener(this);
 
+        Button deleteButton;
+        deleteButton = (Button) findViewById(R.id.btnDelete);
+        deleteButton.setOnClickListener(this);
+
         nameTxt.setText(currentProfile.getName());
         genderTxt.setText(currentProfile.getGender());
         birthdayTxt.setText(currentProfile.getBirthday());
@@ -56,6 +60,14 @@ public class ViewEditProfile2 extends Activity implements View.OnClickListener {
 
     private void backButtonClick()
     {
+
+        startActivity(new Intent("thememeteam.com.yummycrummyapp4.ViewEditProfile"));
+    }
+
+    private void deleteButtonClick()
+    {
+        //dbHandler.deleteProfile(currentProfile.getProfileID());
+        //reset profileNumber?
         startActivity(new Intent("thememeteam.com.yummycrummyapp4.ViewEditProfile"));
     }
 
@@ -66,6 +78,9 @@ public class ViewEditProfile2 extends Activity implements View.OnClickListener {
         {
             case R.id.btnBack:
                 backButtonClick();
+                break;
+            case R.id.btnDelete:
+                deleteButtonClick();
                 break;
         }
     }
