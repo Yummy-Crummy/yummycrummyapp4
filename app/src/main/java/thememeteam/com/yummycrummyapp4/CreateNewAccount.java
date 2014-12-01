@@ -34,7 +34,7 @@ public class CreateNewAccount extends Activity{
         passwordTxt = (EditText) findViewById(R.id.Password);
         emailTxt = (EditText) findViewById(R.id.email);
         birthdayTxt = (EditText) findViewById(R.id.bday);
-        genderTxt = (EditText) findViewById(R.id.gender);
+        genderTxt = (EditText) findViewById(R.id.genderField);
         TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
         accountListView = (ListView) findViewById(R.id.listView);
         dbHandler = new DatabaseHandler(this, null, null, 1);

@@ -2,19 +2,12 @@ package thememeteam.com.yummycrummyapp4;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class AddProfile extends Activity
@@ -34,7 +27,7 @@ public class AddProfile extends Activity
 
         profileName = (EditText) findViewById(R.id.firstName);
         profileBday = (EditText) findViewById(R.id.bday);
-        profileGender = (EditText) findViewById(R.id.gender);
+        profileGender = (EditText) findViewById(R.id.genderField);
         contactImage = (ImageView) findViewById(R.id.imageView);
      //   int myAccount = dbHandler.myAccount;
 
@@ -50,7 +43,7 @@ public class AddProfile extends Activity
                         String.valueOf(profileGender.getText()));
                 Toast.makeText(getApplicationContext(), profile.getAccountID() + " is accountID", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), profile.getProfileID() + " is profileID", Toast.LENGTH_SHORT).show();
-                if (dbHandler.getProfile(dbHandler.getMyAccount(), String.valueOf(profileName.getText())) == null) {
+                if (dbHandler.getProfile(dbHandler.getMyAccount(), String.valueOf(profileName.getText()),dbHandler.getProfileCount(),0) == null) {
                     dbHandler.createProfile(profile);
                     // AccountsList.add(account);
                     Toast.makeText(getApplicationContext(), String.valueOf(profileName.getText()) + " has been created!", Toast.LENGTH_SHORT).show();

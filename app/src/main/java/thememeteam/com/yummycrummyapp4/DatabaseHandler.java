@@ -122,11 +122,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return account;
     }
 
-    public Profile getProfile(int id, String name){
-        String query = "Select * FROM " + TABLE_PROFILES + " WHERE " + KEY_ID + " = \"" + id + "\"" + " AND " + KEY_PROFILE_NAME + " = \"" + name + "\"";
-        SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery(query, null);
+
+
+    //this functions retrieves the correct profile based on the AccountId and the profile name. It is used to ensure that
+    //every profile name is unique
+    public Profile getProfile(int accountID, String name, int profileID, int action ){
+        Cursor cursor;
+        String queryByName = "Select * FROM " + TABLE_PROFILES + " WHERE " + KEY_ID + " = \"" + accountID + "\"" + " AND " + KEY_PROFILE_NAME + " = \"" + name + "\"";
+        String queryByNumber = "Select * FROM " + TABLE_PROFILES + " WHERE " + KEY_ID + " = \"" + accountID + "\"" + " AND " + KEY_PROFILE_ID + " = \"" + profileID + "\"";
+        SQLiteDatabase db = getReadableDatabase();
+        if(action == 0){
+            cursor = db.rawQuery(queryByName, null);}
+        else{
+            cursor = db.rawQuery(queryByNumber, null);
+        }
 
         Profile profile = new Profile();
 

@@ -108,7 +108,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/gender"
+                        android:id="@+id/genderField"
                         android:layout_below="@+id/bday"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
@@ -126,7 +126,7 @@
                             android:layout_height="wrap_content"
                             android:text="submit"
                             android:id="@+id/submitButton"
-                            android:layout_below="@+id/gender"
+                            android:layout_below="@+id/genderField"
                             android:layout_centerHorizontal="true"
                             android:enabled="false"
                             android:layout_marginLeft="50dp" />

@@ -39,7 +39,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gender"
+        android:id="@+id/genderField"
         android:layout_below="@+id/bday"
         android:hint="Gender"
         android:layout_alignLeft="@+id/bday"
@@ -52,9 +52,9 @@
         android:layout_height="wrap_content"
         android:text="Upload Picture"
         android:id="@+id/uploadPicButton"
-        android:layout_below="@+id/gender"
-        android:layout_alignLeft="@+id/gender"
-        android:layout_alignStart="@+id/gender"
+        android:layout_below="@+id/genderField"
+        android:layout_alignLeft="@+id/genderField"
+        android:layout_alignStart="@+id/genderField"
         android:layout_marginLeft="36dp" />
 
     <Button
