@@ -2,10 +2,7 @@ package thememeteam.com.yummycrummyapp4;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +27,7 @@ public class Login_Activity extends Activity implements View.OnClickListener {
         createNewAccountButton.setOnClickListener(this);
 
         Button submitButton;
-        submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton = (Button) findViewById(R.id.btnBack);
         submitButton.setOnClickListener(this);
 
         dbHandler = new DatabaseHandler(this, null, null, 1);
@@ -59,7 +56,7 @@ public class Login_Activity extends Activity implements View.OnClickListener {
             case R.id.createNewAccountButton:
                 createNewAccountButtonClick();
                 break;
-            case R.id.submitButton:
+            case R.id.btnBack:
                 submitButtonClick();
                 break;
         }

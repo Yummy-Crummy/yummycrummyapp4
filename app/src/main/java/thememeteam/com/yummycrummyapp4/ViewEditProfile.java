@@ -27,9 +27,9 @@ public class ViewEditProfile extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_edit_profile);
 
-        Button editButton;
-        editButton = (Button) findViewById(R.id.backButton);
-        editButton.setOnClickListener(this);
+        Button backButton;
+        backButton = (Button) findViewById(R.id.btnBack);
+        backButton.setOnClickListener(this);
 
         dbHandler = new DatabaseHandler(this, null, null, 1);
         profileListView = (ListView) findViewById(R.id.listView2);
@@ -95,7 +95,7 @@ public class ViewEditProfile extends Activity implements View.OnClickListener {
     {
         switch(view.getId())
         {
-            case R.id.backButton:
+            case R.id.btnBack:
                 backButtonClick();
                 break;
         }

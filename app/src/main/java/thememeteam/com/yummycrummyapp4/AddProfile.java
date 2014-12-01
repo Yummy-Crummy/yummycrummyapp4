@@ -29,9 +29,16 @@ public class AddProfile extends Activity
         profileBday = (EditText) findViewById(R.id.bday);
         profileGender = (EditText) findViewById(R.id.genderField);
         contactImage = (ImageView) findViewById(R.id.imageView);
-     //   int myAccount = dbHandler.myAccount;
 
-        final Button submitButton = (Button) findViewById(R.id.submitButton);
+        final Button backButton = (Button) findViewById(R.id.btnBack);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent("thememeteam.com.yummycrummyapp4.HomeScreen"));
+            }
+        });
+
+        final Button submitButton = (Button) findViewById(R.id.btnSubmit);
         submitButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -41,17 +48,14 @@ public class AddProfile extends Activity
                         String.valueOf(profileName.getText()),
                         String.valueOf(profileBday.getText()),
                         String.valueOf(profileGender.getText()));
-                Toast.makeText(getApplicationContext(), profile.getAccountID() + " is accountID", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), profile.getProfileID() + " is profileID", Toast.LENGTH_SHORT).show();
                 if (dbHandler.getProfile(dbHandler.getMyAccount(), String.valueOf(profileName.getText()),dbHandler.getProfileCount(),0) == null) {
                     dbHandler.createProfile(profile);
-                    // AccountsList.add(account);
                     Toast.makeText(getApplicationContext(), String.valueOf(profileName.getText()) + " has been created!", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), dbHandler.getProfileCount() + " profiles", Toast.LENGTH_SHORT).show();
-                    return;
+                    startActivity(new Intent("thememeteam.com.yummycrummyapp4.HomeScreen"));
                 }
-                Toast.makeText(getApplicationContext(), String.valueOf(profileName.getText()) + " already exists. Please use a different name.", Toast.LENGTH_SHORT).show();
-
+                else {
+                    Toast.makeText(getApplicationContext(), String.valueOf(profileName.getText()) + " already exists. Please use a different name.", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });//end setOnClickListener
@@ -66,6 +70,8 @@ public class AddProfile extends Activity
             }
         });
     }//end OnCreate
+
+
 
     public void onActivityResult(int reqCode, int resCode, Intent data){
         if(resCode == RESULT_OK){

@@ -54,14 +54,26 @@
         android:id="@+id/listView3"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/backButton" />
+        android:layout_above="@+id/btnBack"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit"
-        android:id="@+id/backButton"
+        android:text="Submit Changes"
+        android:id="@+id/submitChangesButton"
+        android:layout_toEndOf="@+id/bdayField"
+        android:layout_below="@+id/listView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/btnBack"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/listView3"
+        android:layout_alignEnd="@+id/listView3" />
 
 </RelativeLayout>

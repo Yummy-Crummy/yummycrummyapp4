@@ -50,8 +50,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload Picture"
-        android:id="@+id/uploadPicButton"
+        android:text="Submit Profile"
+        android:id="@+id/btnSubmit"
         android:layout_below="@+id/genderField"
         android:layout_alignLeft="@+id/genderField"
         android:layout_alignStart="@+id/genderField"
@@ -60,11 +60,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="submit"
-        android:id="@+id/submitButton"
-        android:layout_below="@+id/uploadPicButton"
+        android:text="Back"
+        android:id="@+id/btnBack"
+        android:layout_below="@+id/btnSubmit"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_alignParentStart="false" />
 
     <ImageView
         android:layout_width="100dp"

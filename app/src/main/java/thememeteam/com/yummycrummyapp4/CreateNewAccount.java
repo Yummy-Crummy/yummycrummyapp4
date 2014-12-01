@@ -69,7 +69,7 @@ public class CreateNewAccount extends Activity{
 
 
 
-        final Button submitBtn = (Button) findViewById(R.id.submitButton);
+        final Button submitBtn = (Button) findViewById(R.id.btnBack);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

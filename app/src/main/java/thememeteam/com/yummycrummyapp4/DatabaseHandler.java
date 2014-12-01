@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     public static int myAccount = 0;
     public static int myProfile = 0;
     private static final String DATABASE_NAME = "accountManager",
@@ -96,7 +96,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-
+    //This method is used to validate the account when the user logs in
     public Account getAccount(String name, String password){
         String query = "Select * FROM " + TABLE_ACCOUNTS + " WHERE " + KEY_NAME + " = \"" + name + "\"" + " AND " + KEY_PASSWORD + " = \"" + password + "\"";
         SQLiteDatabase db = getReadableDatabase();
@@ -125,8 +125,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 
-    //this functions retrieves the correct profile based on the AccountId and the profile name. It is used to ensure that
-    //every profile name is unique
+    //this functions retrieves the correct profile based on the AccountId and the profile name, or the
+    // accountID and the profileID. The first case is used to ensure that every profile name is unique
+    //upon creation. The second is used to retrieve the correct profile to edit
     public Profile getProfile(int accountID, String name, int profileID, int action ){
         Cursor cursor;
         String queryByName = "Select * FROM " + TABLE_PROFILES + " WHERE " + KEY_ID + " = \"" + accountID + "\"" + " AND " + KEY_PROFILE_NAME + " = \"" + name + "\"";
@@ -231,6 +232,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
 
         return rowsAffected;
+
+    }
+
+    public int updateProfile(Profile profile){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_PROFILE_NAME, profile.getName());
+        values.put(KEY_PROFILE_BIRTHDAY, profile.getBirthday());
+        values.put(KEY_PROFILE_GENDER, profile.getGender());
+
+       // int rowsAffected = db.update(TABLE_PROFILES, values, KEY_PROFILE_ID + " =? ", new String[] {String.valueOf(profile.getProfileID())});
+       // String query = "Select * FROM " + TABLE_PROFILES + " WHERE " + KEY_PROFILE_ID + " = \"" + id + "\"";
+       // String query = "UPDATE " + TABLE_PROFILES + " SET " + KEY_PROFILE_GENDER + " WHERE " + KEY_PROFILE_ID + " = \"" + profile.getProfileID() + "\"";
+       // db.execSQL(query, null);
+       // int rowsAffected = db.update(TABLE_PROFILES, values, KEY_PROFILE_ID +" = '"+String.valueOf(profile.getProfileID())+"' ", null);
+       // db.execSQL("UPDATE profiles SET profileGender ='"+profile.getGender()+"',profileBirthday ='"+
+       //         profile.getBirthday()+"' WHERE profileID='"+profile.getProfileID()+"'");
+        String where = "profileID = ?";
+        int rowsAffected = db.update(TABLE_PROFILES, values, where, new String[]{String.valueOf(profile.getProfileID())});
+
+
+        db.close();
+
+        return rowsAffected;
+        //return 1;
 
     }
 

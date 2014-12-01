@@ -125,7 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="submit"
-                            android:id="@+id/submitButton"
+                            android:id="@+id/btnBack"
                             android:layout_below="@+id/genderField"
                             android:layout_centerHorizontal="true"
                             android:enabled="false"
@@ -137,7 +137,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="OR"
                             android:id="@+id/or"
-                            android:layout_below="@+id/submitButton"
+                            android:layout_below="@+id/btnBack"
                             android:layout_centerHorizontal="true"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp" />

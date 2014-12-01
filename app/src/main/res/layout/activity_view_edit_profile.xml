@@ -10,26 +10,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="View/Edit Profile Home"
-        android:id="@+id/textView2"
+        android:text="View/Edit Profile"
+        android:id="@+id/titleTextView"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Click on a profile to view or edit it."
+        android:id="@+id/instructionTextView"
+        android:layout_below="@+id/titleTextView"
         android:layout_centerHorizontal="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView2"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/instructionTextView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="50dp"
-        android:layout_above="@+id/backButton" />
+        android:layout_above="@+id/btnBack" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:id="@+id/backButton"
+        android:id="@+id/btnBack"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
