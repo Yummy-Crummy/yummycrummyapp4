@@ -23,7 +23,7 @@
         android:id="@+id/firstName"
         android:layout_below="@+id/addProfileText"
         android:layout_centerHorizontal="true"
-        android:hint="First Name"
+        android:hint="Profile Name"
         android:layout_marginTop="110dp" />
 
     <EditText
@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:id="@+id/btnBack"
+        android:id="@+id/btnSubmit"
         android:layout_below="@+id/btnSubmit"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"

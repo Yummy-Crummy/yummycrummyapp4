@@ -30,7 +30,7 @@ public class AddProfile extends Activity
         profileGender = (EditText) findViewById(R.id.genderField);
         contactImage = (ImageView) findViewById(R.id.imageView);
 
-        final Button backButton = (Button) findViewById(R.id.btnBack);
+        final Button backButton = (Button) findViewById(R.id.btnSubmit);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

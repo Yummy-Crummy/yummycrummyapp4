@@ -54,7 +54,7 @@
         android:id="@+id/listView3"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/btnBack"
+        android:layout_above="@+id/btnSubmit"
         android:layout_marginTop="10dp" />
 
     <Button
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:id="@+id/btnBack"
+        android:id="@+id/btnSubmit"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/listView3"
         android:layout_alignEnd="@+id/listView3" />
@@ -83,7 +83,7 @@
         android:id="@+id/btnDelete"
         android:layout_toEndOf="@+id/submitChangesButton"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btnBack"
-        android:layout_toStartOf="@+id/btnBack" />
+        android:layout_toLeftOf="@+id/btnSubmit"
+        android:layout_toStartOf="@+id/btnSubmit" />
 
 </RelativeLayout>

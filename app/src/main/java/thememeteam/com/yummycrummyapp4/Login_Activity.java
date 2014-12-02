@@ -27,7 +27,7 @@ public class Login_Activity extends Activity implements View.OnClickListener {
         createNewAccountButton.setOnClickListener(this);
 
         Button submitButton;
-        submitButton = (Button) findViewById(R.id.btnBack);
+        submitButton = (Button) findViewById(R.id.btnSubmit);
         submitButton.setOnClickListener(this);
 
         dbHandler = new DatabaseHandler(this, null, null, 1);
@@ -56,7 +56,7 @@ public class Login_Activity extends Activity implements View.OnClickListener {
             case R.id.createNewAccountButton:
                 createNewAccountButtonClick();
                 break;
-            case R.id.btnBack:
+            case R.id.btnSubmit:
                 submitButtonClick();
                 break;
         }

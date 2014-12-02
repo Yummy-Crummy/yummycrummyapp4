@@ -20,9 +20,9 @@ import java.util.List;
 
 public class CreateNewAccount extends Activity{
 
-    EditText nameTxt, passwordTxt, emailTxt, birthdayTxt, genderTxt;
-    List<Account> AccountsList = new ArrayList<Account>();
-    ListView accountListView;
+    EditText nameTxt, passwordTxt, confirmPassTxt, emailTxt, birthdayTxt, genderTxt;
+  //  List<Account> AccountsList = new ArrayList<Account>();
+  //  ListView accountListView;
     DatabaseHandler dbHandler;
 
     @Override
@@ -32,23 +32,13 @@ public class CreateNewAccount extends Activity{
 
         nameTxt = (EditText) findViewById(R.id.name);
         passwordTxt = (EditText) findViewById(R.id.Password);
+        confirmPassTxt = (EditText) findViewById(R.id.confirmPassword);
         emailTxt = (EditText) findViewById(R.id.email);
         birthdayTxt = (EditText) findViewById(R.id.bday);
         genderTxt = (EditText) findViewById(R.id.genderField);
-        TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
-        accountListView = (ListView) findViewById(R.id.listView);
+     // accountListView = (ListView) findViewById(R.id.listView);
         dbHandler = new DatabaseHandler(this, null, null, 1);
 
-        tabHost.setup();
-        TabHost.TabSpec tabSpec = tabHost.newTabSpec("account");
-        tabSpec.setContent(R.id.tabNewAccount);
-        tabSpec.setIndicator("New Account");
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec("list");
-        tabSpec.setContent(R.id.tabAccountList);
-        tabSpec.setIndicator("List");
-        tabHost.addTab(tabSpec);
 
         final Button backButton = (Button) findViewById(R.id.btnBack);
 
@@ -69,7 +59,7 @@ public class CreateNewAccount extends Activity{
 
 
 
-        final Button submitBtn = (Button) findViewById(R.id.btnBack);
+        final Button submitBtn = (Button) findViewById(R.id.btnSubmit);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,13 +69,22 @@ public class CreateNewAccount extends Activity{
                         String.valueOf(emailTxt.getText()),
                         String.valueOf(birthdayTxt.getText()),
                         String.valueOf(genderTxt.getText()));
-                if (!accountExists(account)) {
-                    dbHandler.createAccount(account);
-                    AccountsList.add(account);
-                    Toast.makeText(getApplicationContext(), String.valueOf(nameTxt.getText()) + " has been created!", Toast.LENGTH_SHORT).show();
-                    return;
+                if(String.valueOf(passwordTxt.getText()).equals(String.valueOf(confirmPassTxt.getText())) ) {
+
+                    if (dbHandler.testDuplicateAccount(account.getName()) == null) {
+                        dbHandler.createAccount(account);
+                        Toast.makeText(getApplicationContext(), String.valueOf(nameTxt.getText()) + " has been created!", Toast.LENGTH_SHORT).show();
+                        submitButtonClick();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), String.valueOf(nameTxt.getText()) + " already exists. Please use a different name.", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
-                 Toast.makeText(getApplicationContext(), String.valueOf(nameTxt.getText()) + " already exists. Please use a different name.", Toast.LENGTH_SHORT).show();
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Please make your passwords match.", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
@@ -109,14 +108,14 @@ public class CreateNewAccount extends Activity{
             }
         });
 
-        if (dbHandler.getAccountsCount() != 0)
-            AccountsList.addAll(dbHandler.getAllAccounts());
+       // if (dbHandler.getAccountsCount() != 0)
+       //     AccountsList.addAll(dbHandler.getAllAccounts());
 
-        populateList();
+     //   populateList();
 
     }
 
-
+/*
 
     private class AccountListAdapter extends ArrayAdapter<Account>{
         public AccountListAdapter(){
@@ -147,8 +146,9 @@ public class CreateNewAccount extends Activity{
         }
 
     }
+ */
 
-    private boolean accountExists(Account account){
+ /*   private boolean accountExists(Account account){
         String name = account.getName();
         int accountCount = AccountsList.size();
 
@@ -158,6 +158,7 @@ public class CreateNewAccount extends Activity{
         }
         return false;
     }
+    */
 
     private void backButtonClick()
     {
@@ -168,7 +169,7 @@ public class CreateNewAccount extends Activity{
         startActivity(new Intent("thememeteam.com.yummycrummyapp4.Login_Activity"));
     }
 
-    private void populateList(){
+  /*  private void populateList(){
         ArrayAdapter<Account> adapter = new AccountListAdapter();
         accountListView.setAdapter(adapter);
     }
@@ -178,4 +179,5 @@ public class CreateNewAccount extends Activity{
         AccountsList.add(new Account(id, name,password,email,birthday,gender));
 
     }
+    */
 }

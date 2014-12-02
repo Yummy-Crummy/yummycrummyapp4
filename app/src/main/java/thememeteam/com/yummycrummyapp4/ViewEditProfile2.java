@@ -2,7 +2,6 @@ package thememeteam.com.yummycrummyapp4;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +26,7 @@ public class ViewEditProfile2 extends Activity implements View.OnClickListener {
         currentProfile = dbHandler.getProfile(dbHandler.getMyAccount(),"",dbHandler.getMyProfile(),1);
 
         Button backButton;
-        backButton = (Button) findViewById(R.id.btnBack);
+        backButton = (Button) findViewById(R.id.btnSubmit);
         backButton.setOnClickListener(this);
 
         Button deleteButton;
@@ -90,7 +89,7 @@ public class ViewEditProfile2 extends Activity implements View.OnClickListener {
     {
         switch(view.getId())
         {
-            case R.id.btnBack:
+            case R.id.btnSubmit:
                 backButtonClick();
                 break;
             case R.id.btnDelete:

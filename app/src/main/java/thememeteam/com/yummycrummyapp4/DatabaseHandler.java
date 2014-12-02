@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     public static int myAccount = 0;
     public static int myProfile = 0;
     private static final String DATABASE_NAME = "accountManager",
@@ -30,7 +30,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     KEY_PROFILE_ID = "profileID",
     KEY_PROFILE_NAME = "profileName",
     KEY_PROFILE_BIRTHDAY = "profileBirthday",
-    KEY_PROFILE_GENDER = "profileGender";
+    KEY_PROFILE_GENDER = "profileGender",
+    TABLE_PREFERENCES = "preferences",
+    KEY_PREF_ID = "prefID",
+    KEY_RESTAURANT = "restaurant",
+    KEY_ADDRESS = "address",
+    KEY_FOOD_ITEM = "foodItem",
+    KEY_RATING = "rating",
+    KEY_COMMENTS = "comments";
+
 
     public DatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -55,6 +63,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_PROFILE_BIRTHDAY + " TEXT ,"
                 + KEY_PROFILE_GENDER + " TEXT " + ")";
         db.execSQL(CREATE_TABLE_PROFILES);
+        String CREATE_TABLE_PREFERENCES = " CREATE TABLE " +
+                TABLE_PREFERENCES + "("
+                + KEY_PROFILE_ID + " INTEGER ,"
+                + KEY_PREF_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + KEY_RESTAURANT + " TEXT ,"
+                + KEY_ADDRESS + " TEXT ,"
+                + KEY_FOOD_ITEM + " TEXT ,"
+                + KEY_RATING + " INTEGER ,"
+                + KEY_COMMENTS + " TEXT " + ")";
+        db.execSQL(CREATE_TABLE_PREFERENCES);
 
     }
 
@@ -62,6 +80,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROFILES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PREFERENCES);
 
         onCreate(db);
     }
@@ -94,6 +113,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert(TABLE_PROFILES, null, values);
         db.close();
 
+    }
+
+    public Account testDuplicateAccount(String name){
+        String query = "Select * FROM " + TABLE_ACCOUNTS + " WHERE " + KEY_NAME + " = \"" + name + "\"";
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        Account account = new Account();
+
+        if (cursor.moveToFirst()){
+            cursor.moveToFirst();
+            account.setId(Integer.parseInt(cursor.getString(0)));
+            account.setName(cursor.getString(1));
+            account.setPassword(cursor.getString(2));
+            account.setEmail(cursor.getString(3));
+            account.setBirthday(cursor.getString(4));
+            account.setGender(cursor.getString(5));
+        } else {
+            account = null;
+        }
+
+        db.close();
+        cursor.close();
+        return account;
     }
 
     //This method is used to validate the account when the user logs in
