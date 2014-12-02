@@ -8,7 +8,7 @@
     android:id="@+id/createNewAccount">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
@@ -16,22 +16,24 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:hint="Name" />
+        android:hint="Username"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/password"
+        android:id="@+id/Password"
         android:layout_below="@+id/name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Password" />
+        android:hint="Password"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -39,12 +41,14 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/confirmPassword"
-        android:layout_below="@+id/password"
+        android:layout_below="@+id/Password"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Confirm Password" />
+        android:hint="Confirm Password"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -57,7 +61,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Email" />
+        android:hint="Email"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -70,53 +76,48 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Birthday" />
+        android:hint="Birthday"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gender"
+        android:id="@+id/genderField"
         android:layout_below="@+id/bday"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Gender" />
+        android:hint="Gender"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="200dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <TableRow
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="OR"
-        android:id="@+id/or"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/submitButton"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Facebook"
-        android:id="@+id/facebookButton"
-        android:layout_below="@+id/or"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="submit"
-        android:id="@+id/submitButton"
-        android:layout_below="@+id/gender"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TestDB"
-        android:id="@+id/testidButton"
-        android:layout_below="@+id/facebookButton"
+        android:layout_below="@+id/genderField"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="submit"
+            android:id="@+id/btnSubmit"
+            android:layout_below="@+id/genderField"
+            android:layout_centerHorizontal="true"
+            android:enabled="false"
+            android:layout_marginLeft="50dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/btnBack"
+            android:layout_gravity="center_horizontal" />
+
+    </TableRow>
+
 </RelativeLayout>

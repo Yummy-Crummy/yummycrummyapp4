@@ -7,5 +7,13 @@
     <string name="title_activity_login_">Login_Activity</string>
     <string name="title_activity_create_new_account">CreateNewAccount</string>
     <string name="title_activity_test_db">TestDB</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="title_activity_add_profile">AddProfile</string>
+    <string name="title_activity_look_up_restaurant">LookUpRestaurant</string>
+    <string name="title_activity_preference">Preference</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_user_settings">UserSettings</string>
+    <string name="title_activity_view_edit_profile">ViewEditProfile</string>
+    <string name="title_activity_view_edit_profile2">ViewEditProfile2</string>
 
 </resources>

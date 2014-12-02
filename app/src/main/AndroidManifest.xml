@@ -35,10 +35,55 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thememeteam.com.yummycrummyapp4.TestDB"
-            android:label="@string/title_activity_test_db" >
+            android:name="thememeteam.com.yummycrummyapp4.HomeScreen"
+            android:label="@string/title_activity_home_screen" >
             <intent-filter>
-                <action android:name="thememeteam.com.yummycrummyapp4.TestDB" />
+                <action android:name="thememeteam.com.yummycrummyapp4.HomeScreen" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="thememeteam.com.yummycrummyapp4.AddProfile"
+            android:label="@string/title_activity_add_profile" >
+            <intent-filter>
+                <action android:name="thememeteam.com.yummycrummyapp4.AddProfile" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="thememeteam.com.yummycrummyapp4.ViewEditProfile"
+            android:label="@string/title_activity_view_edit_profile" >
+            <intent-filter>
+                <action android:name="thememeteam.com.yummycrummyapp4.ViewEditProfile" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="thememeteam.com.yummycrummyapp4.ViewEditProfile2"
+            android:label="@string/title_activity_view_edit_profile2" >
+            <intent-filter>
+                <action android:name="thememeteam.com.yummycrummyapp4.ViewEditProfile2" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="thememeteam.com.yummycrummyapp4.LookUpRestaurant"
+            android:label="@string/title_activity_look_up_restaurant" >
+            <intent-filter>
+                <action android:name="thememeteam.com.yummycrummyapp4.LookUpRestaurant" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="thememeteam.com.yummycrummyapp4.UserSettings"
+            android:label="@string/title_activity_user_settings" >
+            <intent-filter>
+                <action android:name="thememeteam.com.yummycrummyapp4.UserSettings" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
