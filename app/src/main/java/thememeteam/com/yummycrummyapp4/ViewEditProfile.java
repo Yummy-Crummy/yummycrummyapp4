@@ -37,7 +37,7 @@ public class ViewEditProfile extends Activity implements View.OnClickListener {
         if (dbHandler.getProfileCount() != 0)
             ProfileList.addAll(dbHandler.getCorrectProfiles(dbHandler.getMyAccount()));
 
-        Toast.makeText(getApplicationContext(),ProfileList.size()+ " profiles in the list",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),dbHandler.getProfileCount()+ " profiles in the database",Toast.LENGTH_SHORT).show();
         populateList();
 
 
@@ -47,10 +47,10 @@ public class ViewEditProfile extends Activity implements View.OnClickListener {
                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                {
                    LinearLayout ll = (LinearLayout) view;
-                   TextView clickedView = (TextView) ll.findViewById(R.id.listView2);
+                  // TextView clickedView = (TextView) ll.findViewById(R.id.listView2);
                    Profile currentProfile = ProfileList.get(position);
                    dbHandler.setMyProfile(currentProfile.getProfileID());
-                   Toast.makeText(ViewEditProfile.this, "Item with username "+currentProfile.getName(),Toast.LENGTH_SHORT).show();
+                   Toast.makeText(ViewEditProfile.this, "Item with username "+currentProfile.getName() + " profileID" + currentProfile.getProfileID(),Toast.LENGTH_SHORT).show();
                    startActivity(new Intent("thememeteam.com.yummycrummyapp4.ViewEditProfile2"));
         }
                                                }

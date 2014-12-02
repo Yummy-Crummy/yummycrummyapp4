@@ -38,6 +38,7 @@ public class ViewEditProfile2 extends Activity implements View.OnClickListener {
         genderTxt.setText(currentProfile.getGender());
         birthdayTxt.setText(currentProfile.getBirthday());
 
+
         final Button submitBtn = (Button) findViewById(R.id.submitChangesButton);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +49,8 @@ public class ViewEditProfile2 extends Activity implements View.OnClickListener {
                         String.valueOf(birthdayTxt.getText()),
                         String.valueOf(genderTxt.getText()));
                 dbHandler.updateProfile(profile);
-                Toast.makeText(getApplicationContext(), String.valueOf(genderTxt.getText()) + " has been edited!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), dbHandler.getProfileCount() + " profiles in the database!", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), String.valueOf(genderTxt.getText()) + " has been edited!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent("thememeteam.com.yummycrummyapp4.ViewEditProfile"));
                 }
 
@@ -64,11 +66,23 @@ public class ViewEditProfile2 extends Activity implements View.OnClickListener {
         startActivity(new Intent("thememeteam.com.yummycrummyapp4.ViewEditProfile"));
     }
 
-    private void deleteButtonClick()
-    {
-        //dbHandler.deleteProfile(currentProfile.getProfileID());
+    //This function works as long as you only delete the last profile in the database...
+    //Otherwise it goes bananas
+    private void deleteButtonClick() {
+        int deletedProfileID = currentProfile.getProfileID();
+        dbHandler.deleteProfile(deletedProfileID);
+        Toast.makeText(getApplicationContext(), dbHandler.getProfileCount() + " profiles in the database!", Toast.LENGTH_SHORT).show();
         //reset profileNumber?
-        startActivity(new Intent("thememeteam.com.yummycrummyapp4.ViewEditProfile"));
+        Profile nextProfile;
+        if (dbHandler.getProfileCount() != 0)
+        {
+            for (int i = deletedProfileID + 1; i < dbHandler.getProfileCount() + 1; i++) {
+                nextProfile = dbHandler.getProfile(dbHandler.getMyAccount(), "", i, 1);
+                dbHandler.updateProfileID(nextProfile, i - 1);
+            }
+        }
+            startActivity(new Intent("thememeteam.com.yummycrummyapp4.ViewEditProfile"));
+
     }
 
     @Override
