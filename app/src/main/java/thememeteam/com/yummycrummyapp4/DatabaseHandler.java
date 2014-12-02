@@ -115,6 +115,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    public void createPreferences(Preference preference){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_PROFILE_ID, preference.getProfileID());
+        values.put(KEY_PREF_ID, preference.getPrefID());
+        values.put(KEY_RESTAURANT, preference.getRestaurant());
+        values.put(KEY_ADDRESS, preference.getAddress());
+        values.put(KEY_FOOD_ITEM, preference.getFoodItem());
+        values.put(KEY_RATING, preference.getRating());
+        values.put(KEY_COMMENTS, preference.getComments());
+
+        db.insert(TABLE_PREFERENCES, null, values);
+        db.close();
+    }
+
     public Account testDuplicateAccount(String name){
         String query = "Select * FROM " + TABLE_ACCOUNTS + " WHERE " + KEY_NAME + " = \"" + name + "\"";
         SQLiteDatabase db = getReadableDatabase();
@@ -256,6 +273,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public int getProfileCount(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PROFILES, null);
+        int count = cursor.getCount();
+        cursor.close();
+        db.close();
+        return count;
+    }
+
+    public int getPreferenceCount(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PREFERENCES, null);
         int count = cursor.getCount();
         cursor.close();
         db.close();
