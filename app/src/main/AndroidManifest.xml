@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thememeteam.com.yummycrummyapp4.Login_Activity"
+            android:name="thememeteam.com.yummycrummyapp5.Login_Activity"
             android:label="@string/title_activity_login_" >
             <intent-filter>
                 <action android:name="thememeteam.com.yummycrummyapp4.Login_Activity" />
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thememeteam.com.yummycrummyapp4.CreateNewAccount"
+            android:name="thememeteam.com.yummycrummyapp5.CreateNewAccount"
             android:label="@string/title_activity_create_new_account" >
             <intent-filter>
                 <action android:name="thememeteam.com.yummycrummyapp4.CreateNewAccount" />
@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thememeteam.com.yummycrummyapp4.HomeScreen"
+            android:name="thememeteam.com.yummycrummyapp5.HomeScreen"
             android:label="@string/title_activity_home_screen" >
             <intent-filter>
                 <action android:name="thememeteam.com.yummycrummyapp4.HomeScreen" />
@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thememeteam.com.yummycrummyapp4.AddProfile"
+            android:name="thememeteam.com.yummycrummyapp5.AddProfile"
             android:label="@string/title_activity_add_profile" >
             <intent-filter>
                 <action android:name="thememeteam.com.yummycrummyapp4.AddProfile" />
@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thememeteam.com.yummycrummyapp4.ViewEditProfile"
+            android:name="thememeteam.com.yummycrummyapp5.ViewEditProfile"
             android:label="@string/title_activity_view_edit_profile" >
             <intent-filter>
                 <action android:name="thememeteam.com.yummycrummyapp4.ViewEditProfile" />
@@ -62,7 +62,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thememeteam.com.yummycrummyapp4.ViewEditProfile2"
+            android:name="thememeteam.com.yummycrummyapp5.ViewEditProfile2"
             android:label="@string/title_activity_view_edit_profile2" >
             <intent-filter>
                 <action android:name="thememeteam.com.yummycrummyapp4.ViewEditProfile2" />
@@ -71,7 +71,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thememeteam.com.yummycrummyapp4.LookUpRestaurant"
+            android:name="thememeteam.com.yummycrummyapp5.LookUpRestaurant"
             android:label="@string/title_activity_look_up_restaurant" >
             <intent-filter>
                 <action android:name="thememeteam.com.yummycrummyapp4.LookUpRestaurant" />
@@ -80,7 +80,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thememeteam.com.yummycrummyapp4.UserSettings"
+            android:name="thememeteam.com.yummycrummyapp5.UserSettings"
             android:label="@string/title_activity_user_settings" >
             <intent-filter>
                 <action android:name="thememeteam.com.yummycrummyapp4.UserSettings" />
